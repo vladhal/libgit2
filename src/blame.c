@@ -501,6 +501,7 @@ int git_blame_buffer(
 	}
 
 	/* Diff to the reference blob */
+	diffopts.flags |= GIT_DIFF_DISABLE_INDENT_HEURISTIC;
 	git_diff_blob_to_buffer(reference->final_blob, blame->path,
 		buffer, buffer_len, blame->path, &diffopts,
 		NULL, NULL, buffer_hunk_cb, buffer_line_cb, blame);

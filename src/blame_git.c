@@ -429,7 +429,7 @@ static git_blame__origin* find_origin(
 
 	/* Configure the diff */
 	diffopts.context_lines = 0;
-	diffopts.flags = GIT_DIFF_SKIP_BINARY_CHECK;
+	diffopts.flags = GIT_DIFF_SKIP_BINARY_CHECK | GIT_DIFF_DISABLE_INDENT_HEURISTIC;
 
 	/* Check to see if files we're interested have changed */
 	diffopts.pathspec.count = blame->paths.length;

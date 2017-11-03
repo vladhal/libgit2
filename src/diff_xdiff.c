@@ -233,14 +233,16 @@ void git_xdiff_init(git_xdiff_output *xo, const git_diff_options *opts)
 	xo->config.ctxlen = opts ? opts->context_lines : 3;
 	xo->config.interhunkctxlen = opts ? opts->interhunk_lines : 0;
 
+	xo->params.flags |= XDF_INDENT_HEURISTIC;
+
 	if (flags & GIT_DIFF_IGNORE_WHITESPACE)
 		xo->params.flags |= XDF_WHITESPACE_FLAGS;
 	if (flags & GIT_DIFF_IGNORE_WHITESPACE_CHANGE)
 		xo->params.flags |= XDF_IGNORE_WHITESPACE_CHANGE;
 	if (flags & GIT_DIFF_IGNORE_WHITESPACE_EOL)
 		xo->params.flags |= XDF_IGNORE_WHITESPACE_AT_EOL;
-	if (flags & GIT_DIFF_INDENT_HEURISTIC)
-		xo->params.flags |= XDF_INDENT_HEURISTIC;
+	if (flags & GIT_DIFF_DISABLE_INDENT_HEURISTIC)
+		xo->params.flags &= ~XDF_INDENT_HEURISTIC;
 
 	if (flags & GIT_DIFF_PATIENCE)
 		xo->params.flags |= XDF_PATIENCE_DIFF;

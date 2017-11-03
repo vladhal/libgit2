@@ -207,11 +207,11 @@ typedef enum {
 	 */
 	GIT_DIFF_SHOW_BINARY = (1 << 30),
 
-	/** Use a heuristic that takes indentation and whitespace into account
-	 * which generally can produce better diffs when dealing with ambiguous
-	 * diff hunks.
+	/** Disable the use of a heuristic that takes indentation and whitespace
+	 * into account which generally can produce better diffs when dealing
+	 * with ambiguous diff hunks.
 	 */
-	GIT_DIFF_INDENT_HEURISTIC = (1 << 31),
+	GIT_DIFF_DISABLE_INDENT_HEURISTIC = (1 << 31),
 } git_diff_option_t;
 
 /**

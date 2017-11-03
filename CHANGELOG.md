@@ -10,9 +10,12 @@ v0.26 + 1
   caller for the case-insensitive portions of the key (existing sections are
   used even if they don't match).
 
-* There is a new diff option, `GIT_DIFF_INDENT_HEURISTIC` which activates a
-  heuristic which takes into account whitespace and indentation in order to
-  produce better diffs when dealing with ambiguous diff hunks.
+* We now default to using the new diff heuristic (from the git tool) which takes
+  into account whitespace and indentation in order to produce better diffs when
+  dealing with ambiguous diff hunks.
+
+* There is a new diff option, `GIT_DIFF_DISABLE_INDENT_HEURISTIC` which disables
+  the indent-based heuristic to get back to the previous behaviour.
 
 ### API additions
 

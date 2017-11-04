@@ -398,23 +398,31 @@ GIT_EXTERN(int) git_config_get_string_buf(git_buf *out, const git_config *cfg, c
  *
  * The callback will be called on each variable found
  *
+ * The regular expression is applied case-sensitively on the normalized form of
+ * the variable name: the case-insensitive parts are lower-case.
+ *
  * @param cfg where to look for the variable
  * @param name the variable's name
  * @param regexp regular expression to filter which variables we're
  * interested in. Use NULL to indicate all
  * @param callback the function to be called on each value of the variable
  * @param payload opaque pointer to pass to the callback
+ *
  */
 GIT_EXTERN(int) git_config_get_multivar_foreach(const git_config *cfg, const char *name, const char *regexp, git_config_foreach_cb callback, void *payload);
 
 /**
  * Get each value of a multivar
  *
+ * The regular expression is applied case-sensitively on the normalized form of
+ * the variable name: the case-insensitive parts are lower-case.
+ *
  * @param out pointer to store the iterator
  * @param cfg where to look for the variable
  * @param name the variable's name
  * @param regexp regular expression to filter which variables we're
  * interested in. Use NULL to indicate all
+ *
  */
 GIT_EXTERN(int) git_config_multivar_iterator_new(git_config_iterator **out, const git_config *cfg, const char *name, const char *regexp);
 
@@ -487,6 +495,8 @@ GIT_EXTERN(int) git_config_set_string(git_config *cfg, const char *name, const c
 /**
  * Set a multivar in the local config file.
  *
+ * The regular expression is applied case-sensitively on the value.
+ *
  * @param cfg where to look for the variable
  * @param name the variable's name
  * @param regexp a regular expression to indicate which values to replace
@@ -505,6 +515,8 @@ GIT_EXTERN(int) git_config_delete_entry(git_config *cfg, const char *name);
 
 /**
  * Deletes one or several entries from a multivar in the local config file.
+ *
+ * The regular expression is applied case-sensitively on the value.
  *
  * @param cfg where to look for the variables
  * @param name the variable's name
@@ -552,9 +564,13 @@ GIT_EXTERN(int) git_config_iterator_new(git_config_iterator **out, const git_con
  * Use `git_config_next` to advance the iteration and
  * `git_config_iterator_free` when done.
  *
+ * The regular expression is applied case-sensitively on the normalized form of
+ * the variable name: the case-insensitive parts are lower-case.
+ *
  * @param out pointer to store the iterator
  * @param cfg where to ge the variables from
  * @param regexp regular expression to match the names
+ *
  */
 GIT_EXTERN(int) git_config_iterator_glob_new(git_config_iterator **out, const git_config *cfg, const char *regexp);
 
@@ -568,11 +584,15 @@ GIT_EXTERN(int) git_config_iterator_glob_new(git_config_iterator **out, const gi
  * The pointers passed to the callback are only valid as long as the
  * iteration is ongoing.
  *
+ * The regular expression is applied case-sensitively on the normalized form of
+ * the variable name: the case-insensitive parts are lower-case.
+ *
  * @param cfg where to get the variables from
  * @param regexp regular expression to match against config names
  * @param callback the function to call on each variable
  * @param payload the data to pass to the callback
  * @return 0 or the return value of the callback which didn't return 0
+ *
  */
 GIT_EXTERN(int) git_config_foreach_match(
 	const git_config *cfg,
@@ -692,6 +712,9 @@ GIT_EXTERN(int) git_config_parse_path(git_buf *out, const char *value);
  *
  * This behaviors like `git_config_foreach_match` except instead of all config
  * entries it just enumerates through the given backend entry.
+ *
+ * The regular expression is applied case-sensitively on the normalized form of
+ * the variable name: the case-insensitive parts are lower-case.
  *
  * @param backend where to get the variables from
  * @param regexp regular expression to match against config names (can be NULL)
